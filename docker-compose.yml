@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  myapp:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    # image: nagamine/node-web-app
+    container_name: "my-node-app"
+    ports: 
+      - "49160:8080"
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/app
+    working_dir: /opt/app
+    command: ["npm", "run", "startup"]
