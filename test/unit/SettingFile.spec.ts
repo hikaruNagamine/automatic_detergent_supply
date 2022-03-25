@@ -6,7 +6,6 @@ describe('ファイルクラスのテスト', () => {
         ml_motor_time: 20
     } as const;
 
-
     describe('checkExistFile', () => {
         it('checkExistFile error', () => {
             const testSetFile = new SettingFile(test_default, "");
