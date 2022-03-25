@@ -5,22 +5,34 @@ describe('ファイルクラスのテスト', () => {
         ml_water2detergent: 20,
         ml_motor_time: 20
     } as const;
-    
-    
+
+
     describe('checkExistFile', () => {
         it('checkExistFile error', () => {
             const testSetFile = new SettingFile(test_default, "");
             expect(testSetFile.checkExistFile()).rejects.toThrow();
         });
-
-        // it('checkExistFile success', () => {
-        //     const testSetFile = new SettingFile(test_default, "/opt/app/settings.json");
-        // });
     });
 
-    // describe('success save', () => {
-    // });
+    describe('save', () => {
+        it('save success', async () => {
+            const file:string = "/opt/app/test-settings.json";
+            const testSetFile = new SettingFile(test_default, file);
+            const result = await testSetFile.save(test_default);
+            const resultJSON = Object.entries(result).sort().toString();
+            const testJSON = Object.entries(test_default).sort().toString();
+            expect(Object.is(resultJSON, testJSON)).toBe(true);
+        });
+    });
 
-    // describe('success read', () => {
-    // });
+    describe('read', () => {
+        it('read success', async () => {
+            const file:string = "/opt/app/test-settings.json";
+            const testSetFile = new SettingFile(test_default, file);
+            const result = await testSetFile.read();
+            const resultJSON = Object.entries(result).sort().toString();
+            const testJSON = Object.entries(test_default).sort().toString();
+            expect(Object.is(resultJSON, testJSON)).toBe(true);
+        });
+    });
 });
