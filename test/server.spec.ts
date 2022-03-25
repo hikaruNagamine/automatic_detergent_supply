@@ -11,6 +11,6 @@ describe('APIとして返すテスト', () => {
     it('/test', async () => {
         const response = await request(app).get('/test');
         expect(response.status).toBe(200);
-        expect(response.body).toEqual({ test: 'test' });
+        expect(response.body).toEqual({ name: 'test name', test: 'test' });
     });
 });

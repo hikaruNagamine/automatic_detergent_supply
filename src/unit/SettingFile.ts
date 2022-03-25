@@ -26,7 +26,7 @@ export class SettingFile {
      * constructor
      */
     public constructor(init: Partial<IFile> = defaultFileSettings, init_setting_file_path: string) {
-        const dfl = defaultFileSettings;
+        const dfl:IFile = defaultFileSettings;
         this._version = (init.version || dfl.version);
         this._ml_water2detergent = (init.ml_water2detergent || dfl.ml_water2detergent);
         this._ml_motor_time = (init.ml_motor_time || dfl.ml_motor_time);
@@ -36,7 +36,7 @@ export class SettingFile {
         try {
             await access(this._setting_file_path, constants.R_OK | constants.W_OK);
         } catch (error) {
-            console.log(`${this._setting_file_path} ${error ? 'is not' : 'is'} readable and writable`);
+            // console.log(`${this._setting_file_path} ${error ? 'is not' : 'is'} readable and writable`);
             throw error;
         }
     }
@@ -52,7 +52,7 @@ export class SettingFile {
             await writeFile(this._setting_file_path, JSON.stringify(settings), 'utf8')
             return settings
         } catch (error) {
-            console.log(`SettingFile save error. : ${error}`);
+            // console.log(`SettingFile save error. : ${error}`);
             throw error;
         }
     }
@@ -64,7 +64,7 @@ export class SettingFile {
             let settings = JSON.parse(file)
             return settings
         } catch (error) {
-            console.log(`SettingFile read error. : ${error}`);
+            // console.log(`SettingFile read error. : ${error}`);
             throw error;
         }
     }
