@@ -40,6 +40,6 @@ export function callConsoleLog(logMessage: string): void {
 import axios from 'axios';
 
 export async function getRequest(): Promise<any> {
-  const response = await axios.get('http://localhost:5678');
-  return response.data;
+    const response = await axios.get('http://localhost:5678');
+    return response.data;
 }
