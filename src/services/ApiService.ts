@@ -1,5 +1,5 @@
 //インターフェース
-export interface ITest {
+export interface IApiService {
     test: string;
 }
 
@@ -7,7 +7,7 @@ export interface ITest {
 export class ApiService {
     // TODO : SETTING_FILE_PATHをどこで設定するか。設定ファイルを別途持つならコンストラクタで設定ファイル読み込みする
 
-    public async test(): Promise<ITest> {
+    public async test(): Promise<IApiService> {
         return {
             test: 'app test'
         }   
