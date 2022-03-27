@@ -25,7 +25,7 @@ export class SettingFile {
     /**
      * constructor
      */
-    public constructor(init: Partial<IFile> = defaultFileSettings, init_setting_file_path: string) {
+    public constructor(init_setting_file_path: string, init: Partial<IFile> = defaultFileSettings) {
         const dfl:IFile = defaultFileSettings;
         this._version = (init.version || dfl.version);
         this._ml_water2detergent = (init.ml_water2detergent || dfl.ml_water2detergent);

@@ -8,7 +8,7 @@ describe('ファイルクラスのテスト', () => {
 
     describe('checkExistFile', () => {
         it('checkExistFile error', () => {
-            const testSetFile = new SettingFile(test_default, "");
+            const testSetFile = new SettingFile("", test_default);
             expect(testSetFile.checkExistFile()).rejects.toThrow();
         });
     });
@@ -16,7 +16,7 @@ describe('ファイルクラスのテスト', () => {
     describe('save', () => {
         it('save success', async () => {
             const file:string = "/opt/app/test-settings.json";
-            const testSetFile = new SettingFile(test_default, file);
+            const testSetFile = new SettingFile(file, test_default);
             const result = await testSetFile.save(test_default);
             const resultJSON = Object.entries(result).sort().toString();
             const testJSON = Object.entries(test_default).sort().toString();
@@ -27,7 +27,7 @@ describe('ファイルクラスのテスト', () => {
     describe('read', () => {
         it('read success', async () => {
             const file:string = "/opt/app/test-settings.json";
-            const testSetFile = new SettingFile(test_default, file);
+            const testSetFile = new SettingFile(file, test_default);
             const result = await testSetFile.read();
             const resultJSON = Object.entries(result).sort().toString();
             const testJSON = Object.entries(test_default).sort().toString();
