@@ -40,7 +40,7 @@ export class SettingFile {
             throw error;
         }
     }
-    public async save(set_setting: any): Promise<IFile> {
+    public async save(set_setting: IFile): Promise<IFile> {
         try {
             await this.checkExistFile();
             let file = await readFile(this._setting_file_path, 'utf8')
