@@ -6,7 +6,22 @@ export interface IApiService {
 //クラス
 export class ApiService {
 
-    public async test(): Promise<IApiService> {
+    public async get(): Promise<IApiService> {
+        return {
+            test: 'app test'
+        }   
+    }
+    public async update(): Promise<IApiService> {
+        return {
+            test: 'app test'
+        }   
+    }
+    public async delete(): Promise<IApiService> {
+        return {
+            test: 'app test'
+        }   
+    }
+    public async detergent_out(): Promise<IApiService> {
         return {
             test: 'app test'
         }   
