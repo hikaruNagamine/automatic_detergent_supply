@@ -5,14 +5,14 @@ import { constants } from 'fs';
 export type IFile = Readonly<{
     version: string,            // setting file version
     ml_water2detergent: number, // mL(milliliter): 1 mL(water) = ? mL(detergent)
-    ml_motor_time: number       // Time to drive the motor = 1 mL of detergent
+    ml_motor_time_ms: number       // Time to drive the motor = 1 mL of detergent
 }>
 
 // default
-const defaultFileSettings: IFile = {
+export const defaultFileSettings: IFile = {
     version: '1.0.0',
     ml_water2detergent: 10,
-    ml_motor_time: 10
+    ml_motor_time_ms: 10
 } as const;
 
 //クラス
@@ -29,7 +29,7 @@ export class SettingFile {
         const dfl:IFile = defaultFileSettings;
         this._version = (init.version || dfl.version);
         this._ml_water2detergent = (init.ml_water2detergent || dfl.ml_water2detergent);
-        this._ml_motor_time = (init.ml_motor_time || dfl.ml_motor_time);
+        this._ml_motor_time = (init.ml_motor_time_ms || dfl.ml_motor_time_ms);
         this._setting_file_path = init_setting_file_path
     }
     public async checkExistFile(): Promise<void> {

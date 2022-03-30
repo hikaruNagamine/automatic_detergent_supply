@@ -1,17 +1,20 @@
 import { UserGpio } from '../unit/gpio'
-import { SettingFile, IFile } from '../unit/SettingFile'
-// import { timeout } from '../unit/timeout'
+import { SettingFile, IFile, defaultFileSettings } from '../unit/SettingFile'
+import { sleep } from '../unit/sleep'
 
-const file:string = "/opt/app/test-settings.json";
+// const file:string = "/opt/app/settings.json";
 
 //インターフェース
 export interface IDetergentControl {
     response: string;
+    setting: IFile;
 }
 
 //クラス
 export class DetergentControl {
     private _gpio: UserGpio;
+    private _file:string = "/opt/app/settings.json"; // TODO : SETTING_FILE_PATHをどこで設定するか。設定ファイルを別途持つならコンストラクタで設定ファイル読み込みする
+
     /**
      * constructor
      */
@@ -21,8 +24,21 @@ export class DetergentControl {
     /**
      * get
      */
-    public async getSettings() {
-
+    public async getSettings(): Promise<IDetergentControl> {
+        try {
+            const setting_file = new SettingFile(this._file);
+            let result = await setting_file.read();
+            return {
+                response: 'success',
+                setting: result
+            }
+        } catch (error) {
+            console.log(error);
+            return {
+                response: 'error',
+                setting: defaultFileSettings
+            }
+        }
     }
     /**
      * settings
@@ -30,11 +46,11 @@ export class DetergentControl {
      * @returns 
      */
     public async updateSettings(p_setting:IFile): Promise<IDetergentControl> {
-        const file:string = "/opt/app/settings.json";
-        const setting_file = new SettingFile(file);
+        const setting_file = new SettingFile(this._file);
         let result = await setting_file.save(p_setting);
         return {
-            response: 'success'
+            response: 'success',
+            setting: result
         }
     }
     /**
@@ -42,12 +58,25 @@ export class DetergentControl {
      */
     public async output() {
         if (true) {
-            console.log(Date.now())
+            const setting_file = new SettingFile(this._file);
+            let result = await setting_file.read();
+
             await this._gpio.turnOn()
+            
             // wait time dispenser
+            await sleep(result.ml_motor_time_ms);
+
             await this._gpio.turnOff()
         } else {
             await this._gpio.turnOff()
         }
+    }
+
+    /**
+     * stop
+     * @param params 
+     */
+    public async stop() {
+        await this._gpio.turnOff()
     }
 }

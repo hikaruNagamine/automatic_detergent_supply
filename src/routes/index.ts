@@ -16,7 +16,7 @@ clone_service.clone().catch(e => {console.log("ERROR!", e)});
 // routerにルーティングの動作を記述する
 
 
-// sample
+// sample test service
 router.get('/helloWorld', (req, res) => {
     res.status(200).send({ message: 'Hello, world' });
 });
@@ -38,6 +38,7 @@ router.post('/test', (req, res, next) => {
         .catch(next);
 });
 
+// api service
 // router.get('/detergent', (req, res, next) => {
 //     // const { user } = req.params;
 //     const service = new ApiService();

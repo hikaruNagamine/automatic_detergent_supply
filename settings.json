@@ -1,5 +1,5 @@
 {
     "version": "0.0.1",
     "ml_water2detergent": 10,
-    "ml_motor_time": 10
+    "ml_motor_time_ms": 10
 }
