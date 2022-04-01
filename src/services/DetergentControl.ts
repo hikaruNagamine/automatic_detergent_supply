@@ -57,7 +57,7 @@ export class DetergentControl {
      * output
      */
     public async output() {
-        if (true) {
+        try {
             const setting_file = new SettingFile(this._file);
             let result = await setting_file.read();
 
@@ -67,8 +67,9 @@ export class DetergentControl {
             await sleep(result.ml_motor_time_ms);
 
             await this._gpio.turnOff()
-        } else {
+        } catch(error) {
             await this._gpio.turnOff()
+            throw error
         }
     }
 
